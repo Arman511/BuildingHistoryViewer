@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Building History Viewer</title>
-    <link rel="icon" type="image/x-icon"
-        href="https://raw.githubusercontent.com/CodeTheCity/Moderdeen/main/History/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/CodeTheCity/Moderdeen/main/History/favicon.ico" />
     <!-- Include Leaflet CSS and JavaScript -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -108,7 +106,6 @@
         }
     </style>
 </head>
-
 <body>
     <h1>Building History Viewer</h1>
     <div class="container">
@@ -140,12 +137,11 @@
         </table>
         <div id="map">
             <!-- Initialize the map at the location of Aberdeen -->
-            <iframe id="mapFrame" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-2.2105,57.1497,-2.0861,57.1957&layer=mapnik"></iframe>
+            <iframe id="mapFrame" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-2.2105,57.1497,-2.0861,57.1957&layer=mapnik"></iframe>
         </div>
     </div>
     <script>
-        const jsonFile = "https://raw.githubusercontent.com/Arman511/StreetHistoryViewer/main/combined_data.json"
+        const jsonFile= "https://raw.githubusercontent.com/Arman511/StreetHistoryViewer/main/combined_data.json"
         // Function to create a table row for a building
         function createTableRow(building) {
             const row = document.createElement('tr');
@@ -186,13 +182,10 @@
 
                 // Iterate through the JSON data and group it by ID
                 data.forEach(buildings => {
-                    forEach(building => {
-                        const id = building.id;
-                        if (!buildingData[id] || building[0].version > buildingData[id][0].version) {
-                            buildingData[id] = building;
-                        }
+                    const id = building[0].id;
+                    if (!buildingData[id] || building[0].version > buildingData[id][0].version) {
+                        buildingData[id] = building;
                     }
-                    );
                 });
 
                 // Populate the dropdown with building names
@@ -256,7 +249,7 @@
                         } else {
                             const lat = selectedBuildings[0].lat;
                             const lon = selectedBuildings[0].lon;
-                            console.log(lat, lon)
+                            console.log(lat,lon)
                             mapFrame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - 0.001},${lat - 0.001},${lon + 0.001},${lat + 0.001}&layer=mapnik&marker=${lat},${lon}`;
                         }
                         // Process and display selected buildings with valid coordinates
@@ -289,5 +282,4 @@
 
     </script>
 </body>
-
 </html>
