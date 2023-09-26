@@ -1,15 +1,15 @@
 import json
-import requests
 from concurrent.futures import ThreadPoolExecutor
 import DataRefiner as DR
 from tqdm import tqdm
+import requests
 
 # Initialize an empty list to store the @id values
 id_list = []
 
-# Specify the URLs to fetch the GeoJSON files
-node_geojson_url = 'https://raw.githubusercontent.com/CodeTheCity/Moderdeen/main/History/ListOfNodes.geojson'
-way_geojson_url = 'https://raw.githubusercontent.com/CodeTheCity/Moderdeen/main/History/ListOfWays.geojson'
+# Specify the paths to the local GeoJSON files
+node_geojson_path = 'ListOfNodes.geojson'
+way_geojson_path = 'ListOfWays.geojson'
 
 print("Started getting IDs")
 

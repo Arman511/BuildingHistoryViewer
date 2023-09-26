@@ -3,13 +3,14 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 # Fixed address for Union Street, Aberdeen, UK
-FIXED_ADDRESS = "Union+Street&city=Aberdeen&country=UK"
+FIXED_ADDRESS = "Union+Street&city=Aberdeen"
 
-def forward_geocode(building_number, name):
+def forward_geocode(building_number, name,street, city, country):
+    restOfAddress = f"{street.replace(' ', '+')}&city={city}&country={country}"
     if building_number:
-        url = f"https://geocode.maps.co/search?street={building_number}+{FIXED_ADDRESS}"
+        url = f"https://geocode.maps.co/search?street={building_number}+{restOfAddress}"
     elif name:
-        url = f"https://geocode.maps.co/search?q={name.replace(' ', '+')}&street=union+street&city=aberdeen&country=uk"
+        url = f"https://geocode.maps.co/search?q={name.replace(' ', '+')}&street={restOfAddress}"
     else:
         return None, None
     response = requests.get(url)
@@ -73,10 +74,12 @@ def process_element(element):
     lon = element.get("lon", None)
     building_number = element["tags"].get("addr:housenumber", None)
     postcode = element["tags"].get("addr:postcode", None)
-    
+    street = element["tags"].get("addr:street")
+    city = element["tags"].get("addr:city")
+    country = element["tags"].get("addr:country")
     # Check if lat and lon are None, and perform forward geocoding with the fixed address
     if lat is None and lon is None and (building_number or name != "Unknown"):
-        lat, lon = forward_geocode(building_number, name)
+        lat, lon = forward_geocode(building_number, name, street, city,country)
 
     if (building_number is None or postcode is None) and lat is not None and lon is not None:
         address_data = reverse_geocode(lat, lon)

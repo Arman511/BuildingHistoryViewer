@@ -1,0 +1,558 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2023-09-26T13:13:45Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/313349354",
+        "addr:city": "London",
+        "addr:housenumber": "100",
+        "addr:postcode": "W1D 1LL",
+        "addr:street": "Oxford Street",
+        "amenity": "nightclub",
+        "check_date": "2022-10-28",
+        "fhrs:confidence_management": "10",
+        "fhrs:hygiene": "10",
+        "fhrs:id": "427714",
+        "fhrs:local_authority_id": "00159/0100/0/001",
+        "fhrs:rating": "2",
+        "fhrs:structural": "15",
+        "name": "100 Club",
+        "source:postcode": "FSA Food Hygiene Ratings Database",
+        "website": "https://www.the100club.co.uk/",
+        "wikidata": "Q8535",
+        "wikipedia": "en:100 Club"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1353568,
+          51.5161082
+        ]
+      },
+      "id": "node/313349354"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/383964404",
+        "addr:city": "London",
+        "addr:country": "GB",
+        "addr:housenumber": "214",
+        "addr:postcode": "W1W 8LG",
+        "addr:street": "Oxford Street",
+        "check_date": "2023-05-07",
+        "disused:shop": "clothes",
+        "old_name": "Topshop",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.141352,
+          51.5155336
+        ]
+      },
+      "id": "node/383964404"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/383964407",
+        "addr:city": "London",
+        "addr:country": "GB",
+        "addr:housenumber": "216",
+        "addr:street": "Oxford Street",
+        "check_date": "2022-10-28",
+        "name": "Vans",
+        "old_name": "Miss Selfridge",
+        "shop": "clothes",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.140945,
+          51.515578
+        ]
+      },
+      "id": "node/383964407"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/384759675",
+        "addr:city": "London",
+        "addr:housenumber": "129-131",
+        "addr:postcode": "W1D 2HU",
+        "addr:street": "Oxford Street",
+        "brand": "Jessops",
+        "brand:wikidata": "Q3191701",
+        "brand:wikipedia": "en:Jessops",
+        "check_date": "2022-10-28",
+        "disused:shop": "camera",
+        "name": "Jessops"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1360575,
+          51.5157903
+        ]
+      },
+      "id": "node/384759675"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/385562688",
+        "addr:city": "London",
+        "addr:housenumber": "68",
+        "addr:postcode": "W1D 1BN",
+        "addr:street": "Oxford Street",
+        "disused:shop": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1336904,
+          51.5162714
+        ]
+      },
+      "id": "node/385562688"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/385563574",
+        "addr:city": "London",
+        "addr:housenumber": "58",
+        "addr:street": "Oxford Street",
+        "amenity": "restaurant",
+        "brand": "Wasabi",
+        "brand:wikidata": "Q23891278",
+        "brand:wikipedia": "en:Wasabi (restaurant)",
+        "cuisine": "japanese",
+        "fhrs:confidence_management": "10",
+        "fhrs:hygiene": "5",
+        "fhrs:id": "411010",
+        "fhrs:local_authority_id": "00159/0058/0/000",
+        "fhrs:rating": "2",
+        "fhrs:structural": "15",
+        "name": "Wasabi",
+        "postal_code": "W1D 1BH",
+        "source:addr": "FSA Food Hygiene Ratings Database",
+        "source:postcode": "FSA Food Hygiene Ratings Database"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1332403,
+          51.5163229
+        ]
+      },
+      "id": "node/385563574"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/385564233",
+        "addr:city": "London",
+        "addr:housenumber": "54-56",
+        "addr:postcode": "W1D 1BQ",
+        "addr:street": "Oxford Street",
+        "name": "Millennia",
+        "phone": "+44 20 8290 2642",
+        "postal_code": "W1D 1BH",
+        "shop": "toys",
+        "smoking": "no",
+        "source:addr": "FSA Food Hygiene Ratings Database",
+        "source:postcode": "FSA Food Hygiene Ratings Database",
+        "was:name": "Russell & Bromley",
+        "was:shop": "shoes",
+        "was:website": "https://www.russellandbromley.co.uk/",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1330607,
+          51.5163487
+        ]
+      },
+      "id": "node/385564233"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2431768573",
+        "addr:city": "London",
+        "addr:housenumber": "52",
+        "addr:postcode": "W1D 2HR",
+        "addr:street": "Oxford Street",
+        "brand": "Holland & Barrett",
+        "brand:wikidata": "Q5880870",
+        "brand:wikipedia": "en:Holland & Barrett",
+        "name": "Holland & Barrett",
+        "opening_hours": "Mo-Fr 07:30-21:00; Sa 09:00-21:00; Su 10:00-19:00",
+        "payment:american_express": "yes",
+        "phone": "+44 20 7580 2768",
+        "shop": "health_food",
+        "website": "https://www.hollandandbarrett.com/stores/oxford-street-3431/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1328451,
+          51.5163687
+        ]
+      },
+      "id": "node/2431768573"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3161777712",
+        "addr:city": "London",
+        "addr:housename": "Currys PC World",
+        "addr:housenumber": "94-98",
+        "addr:postcode": "W1D 1BZ",
+        "addr:street": "Oxford Street",
+        "brand": "Carphone Warehouse",
+        "brand:wikidata": "Q118046",
+        "brand:wikipedia": "en:Carphone Warehouse",
+        "check_date": "2022-10-28",
+        "disused:shop": "mobile_phone",
+        "name": "Carphone Warehouse",
+        "phone": "+443443721680",
+        "source": "survey",
+        "survey:date": "2014-11-01",
+        "website": "https://www.carphonewarehouse.com/store-locator/oxford_street_east.html?saddr=Oxford_Street,_London,_UK"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1350376,
+          51.5161487
+        ]
+      },
+      "id": "node/3161777712"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3357928831",
+        "addr:city": "London",
+        "addr:housenumber": "236",
+        "addr:postcode": "W1C 1DE",
+        "addr:street": "Oxford Street",
+        "check_date": "2022-10-28",
+        "name": "Nike Town",
+        "opening_hours": "Mo-Fr 10:00-21:00; Sa 09:00-21:00; Su 11:30-18:00",
+        "phone": "+44 20 7612 0800",
+        "shop": "sports",
+        "website": "https://nike.com",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1416429,
+          51.5155027
+        ]
+      },
+      "id": "node/3357928831"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3516408387",
+        "addr:city": "London",
+        "addr:housenumber": "61",
+        "addr:postcode": "W1D 2EH",
+        "addr:street": "Oxford Street",
+        "brand": "Zara",
+        "brand:wikidata": "Q147662",
+        "brand:wikipedia": "en:Zara (retailer)",
+        "check_date": "2023-06-29",
+        "name": "Zara",
+        "shop": "clothes",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1328914,
+          51.5161009
+        ]
+      },
+      "id": "node/3516408387"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5111050924",
+        "addr:city": "London",
+        "addr:housename": "West One Shopping Centre",
+        "addr:housenumber": "391",
+        "addr:postcode": "W1C 2JS",
+        "addr:street": "Oxford Street",
+        "addr:unit": "C14",
+        "amenity": "cafe",
+        "brand": "Notes",
+        "brand:wikidata": "Q111656694",
+        "cuisine": "coffee_shop",
+        "internet_access": "yes",
+        "internet_access:fee": "no",
+        "level": "-1",
+        "name": "Notes",
+        "opening_hours": "Mo-Fr 07:00-19:00; Sa-Su 10:00-18:00",
+        "takeaway": "yes",
+        "website": "http://notes-uk.co.uk/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1493368,
+          51.5140364
+        ]
+      },
+      "id": "node/5111050924"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5760426550",
+        "addr:city": "London",
+        "addr:housenumber": "214",
+        "addr:postcode": "W1C 1DE",
+        "addr:street": "Oxford Street",
+        "check_date": "2023-05-07",
+        "disused:shop": "clothes",
+        "old_name": "Topman",
+        "wheelchair": "no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.14112,
+          51.5155586
+        ]
+      },
+      "id": "node/5760426550"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6093635058",
+        "addr:city": "London",
+        "addr:housenumber": "120",
+        "addr:postcode": "W1D 1LT",
+        "addr:street": "Oxford Street",
+        "amenity": "cafe",
+        "brand": "Costa",
+        "brand:wikidata": "Q608845",
+        "brand:wikipedia": "en:Costa Coffee",
+        "cuisine": "coffee_shop",
+        "fhrs:id": "1073477",
+        "indoor_seating": "yes",
+        "name": "Costa",
+        "outdoor_seating": "no",
+        "takeaway": "yes",
+        "toilets": "yes",
+        "toilets:wheelchair": "yes",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1365886,
+          51.5160243
+        ]
+      },
+      "id": "node/6093635058"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6313634845",
+        "addr:city": "London",
+        "addr:housenumber": "89",
+        "addr:postcode": "W1D 2EP",
+        "addr:street": "Oxford Street",
+        "brand": "United Colors of Benetton",
+        "brand:wikidata": "Q817139",
+        "brand:wikipedia": "en:Benetton Group",
+        "check_date": "2023-06-29",
+        "name": "United Colors of Benetton",
+        "opening_hours": "Mo-Sa 09:30-21:00;Su 11:30-18:00",
+        "shop": "clothes",
+        "short_name": "Benetton",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1338429,
+          51.5160021
+        ]
+      },
+      "id": "node/6313634845"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7023392369",
+        "addr:city": "London",
+        "addr:housenumber": "73/89",
+        "addr:postcode": "W1D 2ES",
+        "addr:street": "Oxford Street",
+        "brand": "New Look",
+        "brand:wikidata": "Q12063852",
+        "brand:wikipedia": "en:New Look (company)",
+        "clothes": "women;men;children",
+        "fixme": "Has this store closed? (Website is 404.)",
+        "name": "New Look",
+        "opening_hours": "Mo-Sa 09:30-13:00,Su 12:00-18:00",
+        "operator": "New Look",
+        "shop": "clothes",
+        "website": "https://www.newlook.com/uk/store/Oxford-Street-London-GB-2145",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1334694,
+          51.5160438
+        ]
+      },
+      "id": "node/7023392369"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7416769116",
+        "access": "yes",
+        "addr:city": "London",
+        "addr:housename": "Bond Street Entrance",
+        "addr:housenumber": "383",
+        "addr:postcode": "W1C 2JS",
+        "addr:street": "Oxford Street",
+        "entrance": "main",
+        "wheelchair": "no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1493469,
+          51.5142547
+        ]
+      },
+      "id": "node/7416769116"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9444083032",
+        "addr:city": "London",
+        "addr:housename": "Office 1.01",
+        "addr:housenumber": "411",
+        "addr:postcode": "W1C 2PE",
+        "addr:street": "Oxford Street",
+        "name": "Capital Loft Conversions Ltd",
+        "office": "company",
+        "phone": "+44 800 861 1012",
+        "service": "loft conversions in London",
+        "website": "www.capitalloftconversions.co.uk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1510832,
+          51.5140683
+        ]
+      },
+      "id": "node/9444083032"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9712644058",
+        "addr:city": "London",
+        "addr:housenumber": "120",
+        "addr:postcode": "W1A 1AB",
+        "addr:street": "Oxford Street",
+        "brand": "Gap",
+        "brand:wikidata": "Q420822",
+        "description": "This is a new stand-alone Gap store.",
+        "name": "Gap",
+        "opening_hours": "Mo - Sa 09:00-21:00; Su 11:30-18:00",
+        "shop": "clothes",
+        "website": "https://www.gap.co.uk/store-locator"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1367035,
+          51.5160205
+        ]
+      },
+      "id": "node/9712644058"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9960336930",
+        "addr:city": "London",
+        "addr:housenumber": "4",
+        "addr:postcode": "W1D 1AR",
+        "addr:street": "Oxford Street",
+        "name": "Gifts and Giggles",
+        "shop": "gift",
+        "was:amenity": "restaurant",
+        "was:cuisine": "turkish;kebab",
+        "was:fhrs:id": "1470362",
+        "was:name": "Istiklal Turkish Cafe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1307228,
+          51.5166872
+        ]
+      },
+      "id": "node/9960336930"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10908654921",
+        "addr:city": "London",
+        "addr:housename": "West One Shopping Centre",
+        "addr:housenumber": "383",
+        "addr:postcode": "W1C 2JS",
+        "addr:street": "Oxford Street",
+        "brand": "JD Sports",
+        "brand:wikidata": "Q6108019",
+        "name": "JD Sports",
+        "opening_hours": "Mo-Su 09:00-21:00",
+        "payment:cash": "yes",
+        "payment:mastercard": "yes",
+        "payment:visa": "yes",
+        "shop": "sports",
+        "sport": "soccer;basketball"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1493272,
+          51.5141883
+        ]
+      },
+      "id": "node/10908654921"
+    }
+  ]
+}
