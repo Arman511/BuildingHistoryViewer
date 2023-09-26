@@ -26,12 +26,14 @@ To gather historical data for nodes (points) on a specific street in a city, use
 // print results
 out body;
 ;
-out skel qt;```
+out skel qt;
+```
 Make sure to replace {Street Name} and {City Name} with the desired street and city names. Execute the query, and then export the results as a GeoJSON file, renaming it to "ListOfNodes.geojson."
 
 #### Ways (Lines/Polygons)
 To gather historical data for ways (lines/polygons) on a specific street in a city, use the following Overpass Turbo query:
-```[out:json][timeout:999];
+```
+[out:json][timeout:999];
 // gather results
 (
   way["addr:street"="{Street Name}"]["addr:city"="{City Name}"];
@@ -39,13 +41,16 @@ To gather historical data for ways (lines/polygons) on a specific street in a ci
 // print results
 out body;
 ;
-out skel qt;```
+out skel qt;
+```
 
 Again, replace {Street Name} and {City Name} with the desired street and city names. Execute the query and export the results as a GeoJSON file, naming it "ListOfWays.geojson."
 
 ### Step 2: Running GetHistory.py
 After obtaining the GeoJSON files for nodes and ways, you can analyze the historical data by running the GetHistory.py script. Open your terminal and run the following command:
-```python GetHistory.py```
+```
+python GetHistory.py
+```
 The script will process the GeoJSON files and generate additional data for visualization.
 
 Step 3: Viewing Results
