@@ -160,7 +160,7 @@
         }
 
         // Fetch the JSON data from the URL
-        fetch('https://raw.githubusercontent.com/CodeTheCity/Moderdeen/main/History/combined_data.json')
+        fetch('combined_data.json')
             .then(response => response.json())
             .then(data => {
                 const buildingDropdown = document.getElementById('buildingDropdown');

@@ -1,16 +1,15 @@
 import requests
-import time
-from concurrent.futures import ThreadPoolExecutor
+from collections import defaultdict
 
-# Fixed address for Union Street, Aberdeen, UK
-FIXED_ADDRESS = "Union+Street&city=Aberdeen"
 
-def forward_geocode(building_number, name,street, city, country):
-    restOfAddress = f"{street.replace(' ', '+')}&city={city}&country={country}"
+def forward_geocode(building_number, name, street, city, country):
+    address = (
+        f"{street.replace(' ', '+')}&city={city.replace(' ','+')}&country={country}"
+    )
     if building_number:
-        url = f"https://geocode.maps.co/search?street={building_number}+{restOfAddress}"
+        url = f"https://geocode.maps.co/search?street={building_number}+{address}"
     elif name:
-        url = f"https://geocode.maps.co/search?q={name.replace(' ', '+')}&street={restOfAddress}"
+        url = f"https://geocode.maps.co/search?q={name.replace(' ', '+')}&street={address}"
     else:
         return None, None
     response = requests.get(url)
@@ -20,14 +19,15 @@ def forward_geocode(building_number, name,street, city, country):
             first_element = data[0]
             lat_str = first_element.get("lat")
             lon_str = first_element.get("lon")
-            
+
             # Parse lat and lon as floats
             lat = float(lat_str) if lat_str else None
             lon = float(lon_str) if lon_str else None
-            
+
             return lat, lon
-    
+
     return None, None
+
 
 # Function to perform reverse geocoding
 def reverse_geocode(lat, lon):
@@ -39,12 +39,15 @@ def reverse_geocode(lat, lon):
             return data["display_name"]
     return None
 
+
 def process_element(element):
     extracted_data = {}
     previous_name = None  # Initialize previous_name as None
 
     # Extract relevant information
     id_value = element.get("id", "Unknown")
+    if "tags" not in element:
+        return None
     name = element["tags"].get("name", "Unknown")
     alt_name = element["tags"].get("alt_name", None)
     old_name = element["tags"].get("old_name", None)
@@ -55,16 +58,23 @@ def process_element(element):
     building = element["tags"].get("building", None)
     craft = element["tags"].get("craft", None)
 
+    # Extract street, city, and country from tags
+    street = element["tags"].get("addr:street", None)
+    city = element["tags"].get("addr:city", None)
+    country = element["tags"].get("addr:country", None)
+
     # Use the first non-empty name (prefer "name" over "alt_name")
     if name != "Unknown":
-        original_name = name.replace('\u2019', "'").replace('\u00e8', 'è')
+        original_name = name.replace("\u2019", "'").replace("\u00e8", "è")
         name = name.lower()
     elif alt_name:
-        original_name = alt_name.replace('\u2019', "'").replace('\u00e8', 'è')
+        original_name = alt_name.replace("\u2019", "'").replace("\u00e8", "è")
         name = alt_name.lower()
     elif old_name:
         name = old_name.lower()  # Use old_name as the name
-        original_name = "Closed: " + old_name.replace('\u2019', "'").replace('\u00e8', 'è')  # Keep the original casing
+        original_name = "Closed: " + old_name.replace("\u2019", "'").replace(
+            "\u00e8", "è"
+        )  # Keep the original casing
     else:
         name = "Unknown"
         original_name = "Unknown"
@@ -74,14 +84,16 @@ def process_element(element):
     lon = element.get("lon", None)
     building_number = element["tags"].get("addr:housenumber", None)
     postcode = element["tags"].get("addr:postcode", None)
-    street = element["tags"].get("addr:street")
-    city = element["tags"].get("addr:city")
-    country = element["tags"].get("addr:country")
+
     # Check if lat and lon are None, and perform forward geocoding with the fixed address
     if lat is None and lon is None and (building_number or name != "Unknown"):
-        lat, lon = forward_geocode(building_number, name, street, city,country)
+        lat, lon = forward_geocode(building_number, name)
 
-    if (building_number is None or postcode is None) and lat is not None and lon is not None:
+    if (
+        (building_number is None or postcode is None)
+        and lat is not None
+        and lon is not None
+    ):
         address_data = reverse_geocode(lat, lon)
         if address_data:
             parts = address_data.split(", ")
@@ -101,7 +113,7 @@ def process_element(element):
         amenity = disused_amenity
     else:
         amenity = "Unknown"
-    
+
     # Check if disused:shop is " yes" and add "Disused" prefix to the name
     if disused_shop == "yes":
         if name != "Unknown":
@@ -119,7 +131,9 @@ def process_element(element):
             existing_item["lat"] = lat if lat is not None else existing_item["lat"]
             existing_item["lon"] = lon if lon is not None else existing_item["lon"]
             existing_item["building_number"] = (
-                building_number if building_number is not None else existing_item["building_number"]
+                building_number
+                if building_number is not None
+                else existing_item["building_number"]
             )
             existing_item["postcode"] = (
                 postcode if postcode is not None else existing_item["postcode"]
@@ -127,7 +141,7 @@ def process_element(element):
 
     else:
         # This is the first item with this name, add it to the dictionary
-        extracted_data[name] = {
+        extracted_data = {
             "id": id_value,
             "name": original_name,  # Keep the original casing
             "timestamp": timestamp,
@@ -135,26 +149,41 @@ def process_element(element):
             "amenity": amenity,
             "lat": lat,
             "lon": lon,
-            "building_number": building_number if building_number is not None else "Unknown",
+            "building_number": building_number
+            if building_number is not None
+            else "Unknown",
             "postcode": postcode if postcode is not None else "Unknown",
             "note": element.get("tags").get("note", "N/A"),
+            "street": street,
+            "city": city,
+            "country": country,
         }
-        
+
         # Check if there's a previous_name and update the current item's name
         if previous_name:
-            extracted_data[name]["name"] = f"{original_name} (Formerly: {previous_name})".replace("Closed: ", "")
-        
+            extracted_data[
+                "name"
+            ] = f"{original_name} (Formerly: {previous_name})".replace("Closed: ", "")
+
     previous_name = original_name  # Update previous_name for the next iteration
 
     return extracted_data
 
+
 def extract_data(json_data):
+    extracted_data_dict = defaultdict(list)
+
+    for element in json_data.get("elements", []):
+        result = process_element(element)
+        if "tags" not in element:
+            continue
+        name = result.get("name", "Unknown").lower()
+        extracted_data_dict[name].append(result)
+
     extracted_data_list = []
-    
-    # Create a ThreadPoolExecutor with a maximum of 4 worker threads
-    with ThreadPoolExecutor(max_workers=4) as executor:
-        results = executor.map(process_element, json_data.get("elements", []))
-        for result in results:
-            extracted_data_list.append(result)
+
+    for name, items in extracted_data_dict.items():
+        items.sort(key=lambda x: x["timestamp"], reverse=True)
+        extracted_data_list.append(items[0])
 
     return extracted_data_list
