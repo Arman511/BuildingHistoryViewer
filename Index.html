@@ -2,8 +2,6 @@
 
 <html lang="en">
 
-</html>
-
 <head>
     <title>Building History Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -123,15 +121,15 @@
         function createTableRow(building) {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${building.version}</td>
-                <td>${building.timestamp}</td>
-                <td>${building.lat}</td>
-                <td>${building.lon}</td>
-                <td>${building.amenity}</td>
-                <td>${building.name || '-'}</td>
-                <td>${building.note || '-'}</td>
-                <td>${building.website || '-'}</td>
-            `;
+                    <td>${building.version}</td>
+                    <td>${building.timestamp}</td>
+                    <td>${building.lat}</td>
+                    <td>${building.lon}</td>
+                    <td>${building.amenity}</td>
+                    <td>${building.name || '-'}</td>
+                    <td>${building.note || '-'}</td>
+                    <td>${building.website || '-'}</td>
+                `;
             return row;
         }
         function getBuilding(number, street, city, country) {
@@ -169,21 +167,21 @@
                         refindedData = dataRefiner(data);
                         var table = document.getElementById("showingHistoryTable");
                         table.innerHTML = `
-                            <thead>
-                                <tr>
-                                    <th>version</th>
-                                    <th>timestamp</th>
-                                    <th>lat</th>
-                                    <th>lon</th>
-                                    <th>amenity</th>
-                                    <th>name</th>
-                                    <th>note</th>
-                                    <th>website</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        `;
+                                <thead>
+                                    <tr>
+                                        <th>version</th>
+                                        <th>timestamp</th>
+                                        <th>lat</th>
+                                        <th>lon</th>
+                                        <th>amenity</th>
+                                        <th>name</th>
+                                        <th>note</th>
+                                        <th>website</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            `;
                         for (var i = 0; i < refindedData.length; i++) {
                             var building = refindedData[i];
                             var row = createTableRow(building);
