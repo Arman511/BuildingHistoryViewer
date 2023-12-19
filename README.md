@@ -1,7 +1,7 @@
 # Building History Viewer
 
 The **Building History Viewer** is a web tool that allows users to explore the historical information of a building. By entering the building number, street name, city, and country, users can retrieve and view the history associated with the specified building.
-
+It works well with building that are used by a lot of different people, like shops and restaurants. It is not as useful for buildings that are used by a single person, like houses.
 ## Table of Contents
 
 - [Implementation](#implementation)
@@ -22,4 +22,5 @@ To use the Building History Viewer:
 3. Click the search button to initiate the search process.
 4. The building history will be displayed in a table below the search form.
 5. If there is an alert, it indicates that there is no recorded history for that building on OpenStreetMap.
+
 
