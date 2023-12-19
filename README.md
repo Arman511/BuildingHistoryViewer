@@ -1,26 +1,25 @@
 # Building History Viewer
 
-Allows you see the history of a building.
+The **Building History Viewer** is a web tool that allows users to explore the historical information of a building. By entering the building number, street name, city, and country, users can retrieve and view the history associated with the specified building.
 
 ## Table of Contents
 
-- [Implementation](#installation)
+- [Implementation](#implementation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
-## Installation
+## Implementation
 
-Instructions on how to install and set up your project.
+The tool is implemented using open-source technologies, including **OpenStreetMap** and **geocode.maps.co**. **OpenStreetMap** provides the geographical data necessary to retrieve information about buildings, while **geocode.maps.co** is used for geocoding, converting address information into geographical coordinates.
+
+Visit the Building History Viewer at [https://arman511.github.io/BuildingHistoryViewer/](https://arman511.github.io/BuildingHistoryViewer/) to start exploring building histories.
 
 ## Usage
 
-Guidelines and examples on how to use your project.
+To use the Building History Viewer:
 
-## Contributing
+1. Open the [Building History Viewer](https://arman511.github.io/BuildingHistoryViewer/) in your web browser.
+2. Enter the building number, street name, city, and country in the respective input fields.
+3. Click the search button to initiate the search process.
+4. The building history will be displayed in a table below the search form.
+5. If there is an alert, it indicates that there is no recorded history for that building on OpenStreetMap.
 
-Information on how others can contribute to your project.
-
-## License
-
-Specify the license under which your project is distributed.
