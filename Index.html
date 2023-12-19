@@ -2,9 +2,13 @@
 
 <html lang="en">
 
+</html>
+
 <head>
     <title>Building History Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,6 +62,18 @@
             background-color: #4CAF50;
             color: white;
         }
+
+        #map {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+            height: 400px;
+        }
+
+        #mapFrame {
+            height: 400px;
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -79,8 +95,8 @@
         <button type="button"
             onclick="getBuilding(document.getElementById('number').value, document.getElementById('street').value, document.getElementById('city').value, document.getElementById('country').value);">Submit</button>
     </form>
-    <div style="margin: 0 auto;">
-        <table id="showingHistory" style="display: none;">
+    <div id="showingHistory" style="margin: 0 auto;display: none;">
+        <table id="showingHistoryTable">
             <thead>
                 <tr>
                     <th>version</th>
@@ -96,6 +112,11 @@
             <tbody>
             </tbody>
         </table>
+        <div id="map">
+            <!-- Initialize the map at the location of Aberdeen -->
+            <iframe id="mapFrame" frameborder="0" scrolling="no" width="100%" marginheight="0" marginwidth="0"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-2.2105,57.1497,-2.0861,57.1957&layer=mapnik"></iframe>
+        </div>
     </div>
 
     <script>
@@ -146,7 +167,7 @@
                     .then(response => response.text())
                     .then(data => {
                         refindedData = dataRefiner(data);
-                        var table = document.getElementById("showingHistory");
+                        var table = document.getElementById("showingHistoryTable");
                         table.innerHTML = `
                             <thead>
                                 <tr>
@@ -169,7 +190,12 @@
                             console.log(row);
                             table.appendChild(row);
                             document.getElementById("showingHistory").style.display = "block";
+                            document.getElementsByClassName("")
                         }
+                        var mapFrame = document.getElementById("mapFrame");
+                        var mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${refindedData[refindedData.length - 1].lon},${refindedData[refindedData.length - 1].lat},${refindedData[refindedData.length - 1].lon},${refindedData[refindedData.length - 1].lat}&layer=mapnik&marker=${refindedData[refindedData.length - 1].lat},${refindedData[refindedData.length - 1].lon}`;
+                        mapFrame.src = mapUrl;
+
                     });
             }
             function dataRefiner(data) {
@@ -227,7 +253,6 @@
                     }
                     refinedData.push(refinedElement);
                 }
-
                 console.log(refinedData);
                 return refinedData;
             }
