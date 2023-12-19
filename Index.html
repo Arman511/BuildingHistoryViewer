@@ -1,12 +1,68 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 
 <head>
-    <title>Street History Viewer</title>
+    <title>Building History Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Street History Viewer</h1>
+    <h1>Building History Viewer</h1>
 
     <form>
         <label for="number">Building number:</label>
@@ -23,22 +79,40 @@
         <button type="button"
             onclick="getBuilding(document.getElementById('number').value, document.getElementById('street').value, document.getElementById('city').value, document.getElementById('country').value);">Submit</button>
     </form>
-    <div id="showingHistory" style="display: none;">
-        <table>
-            <th>version</th>
-            <th>timestamp</th>
-            <th>lat</th>
-            <th>lon</th>
-            <th>amenity</th>
-            <th>name</th>
-            <th>note</th>
-            <th>website</th>
-            <tbody id="showingHistoryTable">
-
+    <div style="margin: 0 auto;">
+        <table id="showingHistory" style="display: none;">
+            <thead>
+                <tr>
+                    <th>version</th>
+                    <th>timestamp</th>
+                    <th>lat</th>
+                    <th>lon</th>
+                    <th>amenity</th>
+                    <th>name</th>
+                    <th>note</th>
+                    <th>website</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
         </table>
     </div>
-    <script>
 
+    <script>
+        function createTableRow(building) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${building.version}</td>
+                <td>${building.timestamp}</td>
+                <td>${building.lat}</td>
+                <td>${building.lon}</td>
+                <td>${building.amenity}</td>
+                <td>${building.name || '-'}</td>
+                <td>${building.note || '-'}</td>
+                <td>${building.website || '-'}</td>
+            `;
+            return row;
+        }
         function getBuilding(number, street, city, country) {
 
             var address = `${number}+${street.replaceAll(' ', '+')}&city=${city.replaceAll(' ', '+')}&country=${country.replaceAll(' ', '+')}`;
@@ -72,50 +146,31 @@
                     .then(response => response.text())
                     .then(data => {
                         refindedData = dataRefiner(data);
+                        var table = document.getElementById("showingHistory");
+                        table.innerHTML = `
+                            <thead>
+                                <tr>
+                                    <th>version</th>
+                                    <th>timestamp</th>
+                                    <th>lat</th>
+                                    <th>lon</th>
+                                    <th>amenity</th>
+                                    <th>name</th>
+                                    <th>note</th>
+                                    <th>website</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        `;
+                        for (var i = 0; i < refindedData.length; i++) {
+                            var building = refindedData[i];
+                            var row = createTableRow(building);
+                            console.log(row);
+                            table.appendChild(row);
+                            document.getElementById("showingHistory").style.display = "block";
+                        }
                     });
-                // make it add the data to the table tbody showingHistoryTable
-                var table = document.getElementById("showingHistoryTable");
-                for (var i = 0; i < refindedData.length; i++) {
-                    var element = refindedData[i];
-                    var version = element.version;
-                    var timestamp = element.timestamp;
-                    var lat = element.lat;
-                    var lon = element.lon;
-                    var amenity = element.amenity;
-                    var name = element.name;
-                    var note = element.note;
-                    var website = element.website;
-                    var tr = document.createElement("tr");
-                    var td1 = document.createElement("td");
-                    var td2 = document.createElement("td");
-                    var td3 = document.createElement("td");
-                    var td4 = document.createElement("td");
-                    var td5 = document.createElement("td");
-                    var td6 = document.createElement("td");
-                    var td7 = document.createElement("td");
-                    var td8 = document.createElement("td");
-                    td1.innerHTML = version;
-                    td2.innerHTML = timestamp;
-                    td3.innerHTML = lat;
-                    td4.innerHTML = lon;
-                    td5.innerHTML = amenity;
-                    td6.innerHTML = name;
-                    td7.innerHTML = note;
-                    td8.innerHTML = website;
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
-                    tr.appendChild(td3);
-                    tr.appendChild(td4);
-                    tr.appendChild(td5);
-                    tr.appendChild(td6);
-                    tr.appendChild(td7);
-                    tr.appendChild(td8);
-                    table.appendChild(tr);
-                }
-                document.getElementById("showingHistory").style.display = "block";
-                alert("done");
-
-
             }
             function dataRefiner(data) {
                 var refinedData = [];
