@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Street History Viewer</title>
+</head>
+
+<body>
+    <h1>Street History Viewer</h1>
+
+    <form>
+        <label for="number">Building number:</label>
+        <input type="text" id="number" name="number" required><br><br>
+
+        <label for="street">Street Name:</label>
+        <input type="text" id="street" name="street" required><br><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required><br><br>
+        <button type="button"
+            onclick="getBuilding(document.getElementById('number').value, document.getElementById('street').value, document.getElementById('city').value, document.getElementById('country').value);">Submit</button>
+    </form>
+    <div id="showingHistory" style="display: none;">
+        <table>
+            <th>version</th>
+            <th>timestamp</th>
+            <th>lat</th>
+            <th>lon</th>
+            <th>amenity</th>
+            <th>name</th>
+            <th>note</th>
+            <th>website</th>
+            <tbody id="showingHistoryTable">
+
+        </table>
+    </div>
+    <script>
+
+        function getBuilding(number, street, city, country) {
+
+            var address = `${number}+${street.replaceAll(' ', '+')}&city=${city.replaceAll(' ', '+')}&country=${country.replaceAll(' ', '+')}`;
+
+            var url = `https://geocode.maps.co/search?street=${address}`;
+            console.log(url);
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var noNode = true;
+                    var node;
+                    for (var i = 0; i < data.length; i++) {
+                        var element = data[i];
+                        if (element.osm_type == "node") {
+                            noNode = false;
+                            node = element;
+                            break;
+                        }
+                    }
+                    if (noNode) {
+                        alert("No node found");
+                    } else {
+
+                        getHistory(node.osm_id)
+                    }
+                });
+            function getHistory(id) {
+                var url = `https://api.openstreetmap.org/api/0.6/node/${id}/history.json`;
+                var refindedData = [];
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        refindedData = dataRefiner(data);
+                    });
+                // make it add the data to the table tbody showingHistoryTable
+                var table = document.getElementById("showingHistoryTable");
+                for (var i = 0; i < refindedData.length; i++) {
+                    var element = refindedData[i];
+                    var version = element.version;
+                    var timestamp = element.timestamp;
+                    var lat = element.lat;
+                    var lon = element.lon;
+                    var amenity = element.amenity;
+                    var name = element.name;
+                    var note = element.note;
+                    var website = element.website;
+                    var tr = document.createElement("tr");
+                    var td1 = document.createElement("td");
+                    var td2 = document.createElement("td");
+                    var td3 = document.createElement("td");
+                    var td4 = document.createElement("td");
+                    var td5 = document.createElement("td");
+                    var td6 = document.createElement("td");
+                    var td7 = document.createElement("td");
+                    var td8 = document.createElement("td");
+                    td1.innerHTML = version;
+                    td2.innerHTML = timestamp;
+                    td3.innerHTML = lat;
+                    td4.innerHTML = lon;
+                    td5.innerHTML = amenity;
+                    td6.innerHTML = name;
+                    td7.innerHTML = note;
+                    td8.innerHTML = website;
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+                    tr.appendChild(td5);
+                    tr.appendChild(td6);
+                    tr.appendChild(td7);
+                    tr.appendChild(td8);
+                    table.appendChild(tr);
+                }
+                document.getElementById("showingHistory").style.display = "block";
+                alert("done");
+
+
+            }
+            function dataRefiner(data) {
+                var refinedData = [];
+                var data = JSON.parse(data);
+                for (var node in data.elements) {
+                    var element = data.elements[node];
+                    var version = element.version;
+                    var timestamp = element.timestamp;
+                    var lat = element.lat;
+                    var lon = element.lon;
+                    var amenity = null;
+                    var name = null;
+                    var note = null;
+                    var website = null;
+                    if (element.tags != null) {
+                        if (element.tags.amenity != null) {
+                            amenity = element.tags.amenity;
+                        }
+                        if (element.tags.name != null) {
+                            name = element.tags.name;
+                        }
+                        if (element.tags.note != null) {
+                            note = element.tags.note;
+                        }
+                        if (element.tags.website != null) {
+                            website = element.tags.website;
+                        }
+                    }
+                    var alreadyExists = false;
+                    for (var i = 0; i < refinedData.length; i++) {
+                        var refinedElement = refinedData[i];
+                        if (refinedElement.name == name) {
+                            alreadyExists = true;
+                            if (refinedElement.website == null && website != null) {
+                                refinedData[i].website = website;
+                            }
+                            if (refinedElement.note == null && note != null) {
+                                refinedData[i].note = note;
+                            }
+                        }
+                    }
+                    if (alreadyExists) {
+                        continue;
+                    }
+                    var refinedElement = {
+                        version: version,
+                        timestamp: timestamp,
+                        lat: lat,
+                        lon: lon,
+                        amenity: amenity,
+                        name: name,
+                        note: note,
+                        website: website
+                    }
+                    refinedData.push(refinedElement);
+                }
+
+                console.log(refinedData);
+                return refinedData;
+            }
+        }
+    </script>
+</body>
+
+</html>
